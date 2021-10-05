@@ -13,6 +13,7 @@
     "autoprefixer": "^10.3.6",
     "axios": "^0.21.4",
     "bcrypt": "^5.0.1",
+    "cloudinary": "^1.27.0",
     "js-cookie": "^3.0.1",
     "jsonwebtoken": "^8.5.1",
     "mongoose": "^6.0.8",
@@ -21,8 +22,10 @@
     "react": "17.0.2",
     "react-dom": "17.0.2",
     "react-icons": "^4.2.0",
+    "react-image-file-resizer": "^0.4.7",
     "react-loader-spinner": "^4.0.0",
     "react-toast-notifications": "^2.5.1",
+    "slugify": "^1.6.1",
     "tailwindcss": "^2.2.16"
   },
   "devDependencies": {

@@ -1,3 +1,4 @@
+import { getDataApi } from "../utils/functions"
 
 export default function Home() {
   return (
@@ -5,4 +6,12 @@ export default function Home() {
       <h3 className="font-bold text-center">hi</h3>
     </div>
   )
+}
+
+export async function getServerSideProps(context) {
+  //const res = await getDataApi("product");
+  //console.log(res.data);
+  return {
+    props: {}
+  }
 }

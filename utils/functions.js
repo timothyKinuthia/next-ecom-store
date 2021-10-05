@@ -2,12 +2,8 @@ import axios from "axios";
 
 const baseUrl = process.env.BASE_URL;
 
-export const getDataApi = async (url, token) => {
-    return await axios.get(`${baseUrl}/api/${url}`, {
-        headers: {
-            Authorization: token
-        }
-    })
+export const getDataApi = async (url) => {
+    return await axios.get(`${baseUrl}/api/${url}`)
 };
 
 export const postDataApi = async (url, body, token) => {
