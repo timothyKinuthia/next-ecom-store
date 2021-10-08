@@ -32,7 +32,7 @@ const upload = async (req, res) => {
 
     res.status(201).json({ imgs: imgArr });
   } catch (err) {
-    console.log(err);
+    res.status(400).json({ msg: err.message });
   }
 };
 

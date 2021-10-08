@@ -8,7 +8,6 @@ const Loading = ({type, color, height, width}) => {
         color={color}
         height={height}
         width={width}
-        timeout={3000} //3 secs
       />
     )
 }

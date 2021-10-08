@@ -1,4 +1,7 @@
 module.exports = {
+  images: {
+    domains: ["res.cloudinary.com"]
+  },
   env: {
     "BASE_URL": "http://localhost:3000",
     "MONGODB_URI": "mongodb+srv://adminUser:adminUser@nextjs.dob5x.mongodb.net/next-ecom?retryWrites=true&w=majority",
