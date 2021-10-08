@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useCallback } from "react";
 import AdminNav from "../../components/product/AdminNav";
 import { getDataApi, postDataApi } from "../../utils/functions";
 import { useToasts } from "react-toast-notifications";
@@ -9,15 +9,19 @@ const CategoryCreate = () => {
 
   const { addToast } = useToasts();
 
-  useEffect(() => {
-    (() => {
-      getDataApi("product/category")
-        .then((res) => setCategories(res.data.categories))
-        .catch((err) => {
-          addToast(err.response.data.msg, { appearance: "error" });
-        });
-    })();
+  const loadProducts = useCallback(() => {
+    getDataApi("product/category")
+      .then((res) => {
+        setCategories(res.data.categories);
+      })
+      .catch((err) => {
+        addToast(err.response.data.msg, { appearance: "error" });
+      });
   }, [addToast]);
+
+  useEffect(() => {
+    loadProducts();
+  }, [loadProducts]);
 
   const handleInputChange = (evt) => {
     setName(evt.target.value);
@@ -25,7 +29,9 @@ const CategoryCreate = () => {
 
   const handleSubmit = async (evt) => {
     evt.preventDefault();
-    const res = await postDataApi("product/category", { name });
+    await postDataApi("product/category", { name });
+    loadProducts();
+    setName("");
   };
   return (
     <div className="sm:flex h-screen border-t">
@@ -35,6 +41,7 @@ const CategoryCreate = () => {
         <form onSubmit={handleSubmit} className="w-full">
           <input
             type="text"
+            value={name}
             onChange={handleInputChange}
             className="w-2/3 border border-black py-1 px-2 focus:outline-none"
           />

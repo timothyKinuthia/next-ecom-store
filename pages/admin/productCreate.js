@@ -1,24 +1,31 @@
 import React, { useState, useEffect } from "react";
+import { useToasts } from "react-toast-notifications";
 
 import ImageUploads from "../../components/images/ImageUploads";
+import Loading from "../../components/loaders/Loading";
 import AdminNav from "../../components/product/AdminNav";
 import { getDataApi, postDataApi } from "../../utils/functions";
 
-const inputStyles = "w-full bg-gray-100 focus:bg-white border py-2 px-3 focus:outline-none";
+const inputStyles =
+  "w-full bg-gray-100 focus:bg-white border py-2 px-3 focus:outline-none";
 
 const ProductCreate = () => {
   const initialState = {
     title: "",
-    price: 0,
+    price: "",
     description: "",
     content: "",
     category: "",
     checked: false,
-    inStock: 0,
+    inStock: "",
   };
   const [product, setProduct] = useState(initialState);
   const [categories, setCategories] = useState([]);
   const [prodImgs, setProdImgs] = useState([]);
+  const [loading, setLoading] = useState(false);
+
+  //toast
+  const { addToast } = useToasts();
 
   useEffect(() => {
     (() => {
@@ -28,29 +35,41 @@ const ProductCreate = () => {
           addToast(err.response.data.msg, { appearance: "error" });
         });
     })();
-  }, []);
+  }, [addToast]);
 
   const handleInputChange = (evt) => {
-    setProduct({ ...product, [evt.target.name]:  evt.target.value });
+    setProduct({ ...product, [evt.target.name]: evt.target.value });
   };
   const handleCategoryChange = (evt) => {
-    setProduct({...product, category: evt.target.value})
-  }
+    setProduct({ ...product, category: evt.target.value });
+  };
 
   const handleSubmit = (evt) => {
     evt.preventDefault();
-    postDataApi("product/createProduct").then((res) => {
-      console.log(res.data);
-    }).catch((err) => {
-      console.log(err.response.data.msg)
-    })
-  }
+    setLoading(true);
+    postDataApi("product/createProduct", { ...product, images: prodImgs })
+      .then((res) => {
+        setProduct(initialState);
+        setProdImgs([]);
+        setLoading(false);
+        addToast(res.data.msg, { appearance: "success" });
+      })
+      .catch((err) => {
+        addToast(err.response.data.msg, {appearance: "error"});
+        setLoading(false);
+      });
+  };
 
   return (
     <div className="sm:flex border-t">
       <AdminNav />
-      <form onSubmit={handleSubmit} className="mt-6 w-full items-center sm:w-4/5 flex flex-col space-y-6 px-2 mb-6">
-        <h2 className="sm:w-2/4 text-left font-bold text-xl sm:text-2xl font-pocifico">Create Product</h2>
+      <form
+        onSubmit={handleSubmit}
+        className="mt-6 w-full items-center sm:w-4/5 flex flex-col space-y-6 px-2 mb-6"
+      >
+        <h2 className="sm:w-2/4 text-left font-bold text-xl sm:text-2xl font-pocifico">
+          Create Product
+        </h2>
         <div className="w-5/6 sm:w-4/5">
           <ImageUploads prodImgs={prodImgs} setProdImgs={setProdImgs} />
         </div>
@@ -134,7 +153,18 @@ const ProductCreate = () => {
                 ))}
             </select>
           </div>
-          <button type="submit" className="w-full bg-light hover:bg-dark p-2 text-center text-white font-bold">Add Product</button>
+          <button
+            type="submit"
+            className={`w-full bg-light hover:bg-dark flex justify-center p-2 text-white font-bold ${
+              loading ? "pointer-events-none" : ""
+            }`}
+          >
+            {loading ? (
+              <Loading type="TailSpin" color="white" height={20} width={20} />
+            ) : (
+              "Add Product"
+            )}
+          </button>
         </div>
       </form>
     </div>

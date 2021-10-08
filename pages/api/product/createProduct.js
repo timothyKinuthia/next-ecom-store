@@ -11,7 +11,16 @@ export default async function createProduct(req, res) {
   switch (method) {
     case "POST":
       try {
-        await Product.create({ ...req.body, slug: slugify(req.body.name) });
+        const price = +req.body.price;
+        const inStock = +req.body.inStock;
+        const checked = JSON.parse(req.body.checked);
+        await Product.create({
+          ...req.body,
+          price,
+          inStock,
+          checked,
+          slug: slugify(req.body.title),
+        });
         res
           .status(201)
           .json({ success: true, msg: "Product created successfully" });

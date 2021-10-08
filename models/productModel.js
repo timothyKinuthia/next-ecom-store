@@ -10,7 +10,7 @@ const productSchema = new mongoose.Schema(
     slug: {
       type: String,
       required: true,
-      unique: true
+      unique: true,
     },
     price: {
       type: Number,
@@ -30,8 +30,8 @@ const productSchema = new mongoose.Schema(
       required: true,
     },
     category: {
-      type: String,
-      required: true,
+      type: mongoose.Types.ObjectId,
+      ref: "Category",
     },
     checked: {
       type: Boolean,
