@@ -22,7 +22,7 @@ const Navbar = () => {
   };
 
   return (
-    <div className="py-3 px-4 sm:px-8 flex-col sm:flex-row justify-center">
+    <div className="py-1 px-4 sm:px-8 flex-col sm:flex-row justify-center">
       <div className="w-full py-2 flex justify-between items-center">
         <Link href="/">
           <a className="text-3xl font-bold font-archivo">

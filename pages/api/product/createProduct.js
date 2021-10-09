@@ -31,7 +31,9 @@ export default async function createProduct(req, res) {
     case "GET":
       try {
         const products = await Product.find({}).sort("-createdAt");
-        res.status(200).json({ success: true, products });
+        res
+          .status(200)
+          .json({ success: true, results: products.length, products });
       } catch (err) {
         res.status(400).json({ success: false, msg: err.message });
       }
