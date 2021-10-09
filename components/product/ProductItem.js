@@ -8,7 +8,7 @@ const ProductItem = ({ product }) => {
     <div>
       <div className="p-2 max-w-md mx-auto space-y-2">
         <img
-          className="w-full object-cover"
+          className="w-full object-cover rounded-md"
           src={product.images[0].url}
           alt={product.title}
         />
@@ -20,14 +20,14 @@ const ProductItem = ({ product }) => {
           <span className="font-semibold text-gray-700">$ {product.price}</span>
         </div>
         <div className="flex justify-between">
-          <button className="flex items-center bg-gray-100 p-1 rounded">
+          <button className="flex items-center bg-gray-100 py-1.5 px-2 rounded-md">
             <span>Add</span>
             <span className="ml-2">
               <AiOutlineShoppingCart />
             </span>
           </button>
-          <Link href={`product/${product._id}`}>
-            <a className="flex items-center bg-gray-100 p-1 rounded">
+          <Link href={`product/${product.slug}`}>
+            <a className="flex items-center bg-gray-100 py-1.5 px-2 rounded-md">
               <span>View</span>
               <span className="ml-2">
                 <AiOutlineEye />
