@@ -6,9 +6,9 @@ import { AiOutlineEye, AiOutlineShoppingCart } from "react-icons/ai";
 const ProductItem = ({ product }) => {
   return (
     <div>
-      <a className="p-2 max-w-lg mx-auto space-y-1">
+      <div className="p-2 max-w-md mx-auto space-y-2">
         <img
-          className="w-full h-96 object-cover"
+          className="w-full object-cover"
           src={product.images[0].url}
           alt={product.title}
         />
@@ -20,14 +20,14 @@ const ProductItem = ({ product }) => {
           <span className="font-semibold text-gray-700">$ {product.price}</span>
         </div>
         <div className="flex justify-between">
-          <button className="flex items-center bg-gray-100 p-1 rounded text-sm">
+          <button className="flex items-center bg-gray-100 p-1 rounded">
             <span>Add</span>
             <span className="ml-2">
               <AiOutlineShoppingCart />
             </span>
           </button>
           <Link href={`product/${product._id}`}>
-            <a className="flex items-center bg-gray-100 p-1 rounded text-sm">
+            <a className="flex items-center bg-gray-100 p-1 rounded">
               <span>View</span>
               <span className="ml-2">
                 <AiOutlineEye />
@@ -35,7 +35,7 @@ const ProductItem = ({ product }) => {
             </a>
           </Link>
         </div>
-      </a>
+      </div>
     </div>
   );
 };

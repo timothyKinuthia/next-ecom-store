@@ -5,7 +5,7 @@ import ProductItem from "../components/product/ProductItem";
 
 export default function Home({ products, results }) {
   return (
-    <div className="bg-red-700 bg-gray-100 py-4 px-4 lg:px-0">
+    <div className="bg-red-700 bg-gray-100 py-4 px-4 md:px-0">
       <Head>
         <title>Home page</title>
       </Head>
@@ -13,7 +13,7 @@ export default function Home({ products, results }) {
         <h2 className="pt-2 px-4 text-lg text-center lg:text-left font-pocifico font-bold">
           TRENDING PRODUCTS
         </h2>
-        <div className=" p-2 grid grid-cols-1  sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+        <div className=" p-2 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
           {products.length > 0 &&
             products.map((prod) => (
               <ProductItem key={prod._id} product={prod} />
