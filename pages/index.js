@@ -5,7 +5,7 @@ import ProductItem from "../components/product/ProductItem";
 
 export default function Home({ products, results }) {
   return (
-    <div className="bg-red-700 bg-gray-100 py-4">
+    <div className="bg-red-700 bg-gray-100 py-4 px-4 lg:px-0">
       <Head>
         <title>Home page</title>
       </Head>
