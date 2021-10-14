@@ -20,7 +20,7 @@ export const ContextProvider = ({ children }) => {
         console.log(err);
       });
   }, []);
-  const initialState = { notify: {}, auth: {} };
+  const initialState = { notify: {}, auth: {}, cart: [] };
   const [state, dispatch] = useReducer(reducers, initialState);
 
   return (
