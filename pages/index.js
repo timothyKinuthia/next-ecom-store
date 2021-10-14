@@ -24,7 +24,7 @@ export default function Home({ products, results }) {
   );
 }
 
-export async function getServerSideProps(context) {
+export async function getServerSideProps() {
   const res = await getDataApi("product/createProduct");
 
   return {

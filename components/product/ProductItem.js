@@ -20,14 +20,14 @@ const ProductItem = ({ product }) => {
           <span className="font-semibold text-gray-700">$ {product.price}</span>
         </div>
         <div className="flex justify-between">
-          <button className="flex items-center bg-gray-100 py-1.5 px-2 rounded-md">
+          <button className="flex items-center bg-gray-100 hover:bg-gray-200 py-1.5 px-2 rounded-md">
             <span>Add</span>
             <span className="ml-2">
               <AiOutlineShoppingCart />
             </span>
           </button>
           <Link href={`product/${product.slug}`}>
-            <a className="flex items-center bg-gray-100 py-1.5 px-2 rounded-md">
+            <a className="flex items-center bg-gray-100 hover:bg-gray-200 py-1.5 px-2 rounded-md">
               <span>View</span>
               <span className="ml-2">
                 <AiOutlineEye />
