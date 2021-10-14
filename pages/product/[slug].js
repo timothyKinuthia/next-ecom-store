@@ -36,16 +36,22 @@ const ProductDetail = ({ product }) => {
             <h2 className="text-lg sm:text-3xl font-bold capitalise">
               {product.title}
             </h2>
-            <h3 className="text-lg sm:text-2xl font-medium">
-              ${product.price.toFixed(2)}{" "}
-            </h3>
+            <div className="flex justify-between mr-4 text-gray-400">
+              <h3 className="text-lg sm:text-2xl font-medium">
+                ${product.price.toFixed(2)}{" "}
+              </h3>
+              {product.inStock > 0 ? <span>In Stock: {product.inStock}</span> : <span className="text-red">Out of stock</span>}
+            </div>
+
             <p className="text-gray-500">{product.description}</p>
           </div>
           <div className="mt-10">
-            <button className="w-full p-3 bg-gray-700 hover:bg-gray-800 text-gray-50 font-bold rounded-md">Add to cart</button>
+            <button className="w-full p-3 bg-gray-700 hover:bg-gray-800 text-gray-50 font-bold rounded-md">
+              Add to cart
+            </button>
           </div>
           <div className="my-10 h-0.5 bg-gray-100"></div>
-          <div >
+          <div>
             <h3 className="text-gray-600 font-medium text-lg">Features</h3>
             <p className="mt-2 text-gray-500">{product.content}</p>
           </div>
