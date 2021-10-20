@@ -1,10 +1,15 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import Head from "next/head";
 
+import { Context } from "../../store/store";
 import { getDataApi } from "../../utils/functions";
+import { addToCart } from "../../store/actions";
 
 const ProductDetail = ({ product }) => {
   const [activeIndex, setActiveIndex] = useState(0);
+
+  const { state, dispatch } = useContext(Context);
+
   return (
     <div className="py-4 px-2 bg-gray-100">
       <Head>
@@ -40,13 +45,20 @@ const ProductDetail = ({ product }) => {
               <h3 className="text-lg sm:text-2xl font-medium">
                 ${product.price.toFixed(2)}{" "}
               </h3>
-              {product.inStock > 0 ? <span>In Stock: {product.inStock}</span> : <span className="text-red">Out of stock</span>}
+              {product.inStock > 0 ? (
+                <span>In Stock: {product.inStock}</span>
+              ) : (
+                <span className="text-red">Out of stock</span>
+              )}
             </div>
 
             <p className="text-gray-500">{product.description}</p>
           </div>
           <div className="mt-10">
-            <button className="w-full p-3 bg-gray-700 hover:bg-gray-800 text-gray-50 font-bold rounded-md">
+            <button
+              onClick={() => dispatch(addToCart(product, state.cart))}
+              className="w-full p-3 bg-gray-700 hover:bg-gray-800 text-gray-50 font-bold rounded-md"
+            >
               Add to cart
             </button>
           </div>

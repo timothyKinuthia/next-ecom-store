@@ -7,6 +7,27 @@ import reducers from "./reducer/index";
 export const Context = createContext();
 
 export const ContextProvider = ({ children }) => {
+  const initialState = {
+    notify: {},
+    auth: {},
+    cart: {
+      products: [],
+      total: 0
+    },
+  };
+  const [state, dispatch] = useReducer(reducers, initialState);
+
+  // useEffect(() => {
+  //   localStorage.setItem("cart", JSON.stringify(state.cart.products));
+  // }, [state.cart.products]);
+
+  // useEffect(() => {
+  //   dispatch({
+  //     type: actionTypes.ADD_TO_CART,
+  //     payload: JSON.parse(localStorage.getItem("cart")),
+  //   });
+  // }, []);
+
   useEffect(() => {
     getDataApi("auth/refreshToken")
       .then((res) => {
@@ -20,8 +41,6 @@ export const ContextProvider = ({ children }) => {
         console.log(err);
       });
   }, []);
-  const initialState = { notify: {}, auth: {}, cart: [] };
-  const [state, dispatch] = useReducer(reducers, initialState);
 
   return (
     <Context.Provider value={{ state, dispatch }}>{children}</Context.Provider>

@@ -1,7 +1,6 @@
 import bcrypt from "bcrypt";
 
 import User from "../../../models/userModel";
-import validate from "../../../utils/validateUser";
 import dbConnect from "../../../utils/dbConnect";
 import { genAccessToken, genRefreshToken } from "../../../utils/generateToken";
 

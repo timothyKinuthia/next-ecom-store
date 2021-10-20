@@ -10,7 +10,7 @@ const Navbar = () => {
   const router = useRouter();
 
   const { state, dispatch } = useContext(Context);
-  const { auth } = state;
+  const { auth, cart } = state;
 
   const navLinks = [
     { name: "Cart", icon: <AiOutlineShoppingCart />, link: "/cart" },
@@ -44,7 +44,7 @@ const Navbar = () => {
                 <AiOutlineShoppingCart />
               </span>
               <span className="absolute -top-3.5 -right-4 bg-red text-white font-semibold text-sm py-0.5 px-2 rounded-full">
-                0
+                {cart.products.length}
               </span>
               <span className="absolute w-full bg-black transform scale-x-0 group-hover:scale-x-100 transition ease-bloop duration-400 rounded-sm h-0.5 -bottom-1"></span>
               {isActive("/cart") && (
@@ -65,7 +65,9 @@ const Navbar = () => {
                 )}
               </a>
             </Link>
-          ) : <UserMenu />}
+          ) : (
+            <UserMenu />
+          )}
         </div>
       </div>
       <div className="sm:hidden my-4 flex justify-center">
