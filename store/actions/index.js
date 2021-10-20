@@ -26,7 +26,7 @@ export const addToCart = (product, cart) => {
       cartProducts[idx] = {
         ...cartProducts[idx],
         quantity: cartProducts[idx].quantity + 1,
-        sum,
+        sum: sum,
       };
 
       return {
@@ -57,4 +57,18 @@ export const reduceCartItem = (product, cart) => {
   };
 };
 
-export const deleteCartItem = (product, cart) => {};
+export const deleteCartItem = (product, cart) => {
+  const cartProducts = [...cart.products];
+  const idx = cartProducts.findIndex((prod) => prod._id === product._id);
+  const total = cart.total - cartProducts[idx].sum;
+  cartProducts.splice(idx, 1);
+
+  return {
+    type: actionTypes.REDUCE_FROM_CART,
+    payload: {
+      ...cart,
+      products: cartProducts,
+      total: total * 1,
+    },
+  };
+};

@@ -1,5 +1,6 @@
 import React, { useContext } from "react";
 import Head from "next/head";
+import Link from "next/link";
 
 import { Context } from "../store/store";
 import CartItem from "../components/cart/CartItem";
@@ -47,6 +48,9 @@ const Cart = () => {
                 className="border py-1 bg-gray-50 focus:outline-none focus:bg-white"
               />
             </div>
+            <Link href="/">
+              <a className="mt-2 block text-light font-bold">Continue Shopping</a>
+            </Link>
             <div className="text-lg font-semibold">Total: <span className="ml-1 text-red">${cart.total}</span></div>
             <button className="w-full py-1 bg-light text-white font-bold">
               Proceed to checkout

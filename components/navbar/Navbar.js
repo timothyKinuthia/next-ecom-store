@@ -25,8 +25,17 @@ const Navbar = () => {
     <div className="py-1 px-4 sm:px-8 flex-col sm:flex-row justify-center">
       <div className="w-full py-2 flex justify-between items-center">
         <Link href="/">
-          <a className="text-3xl font-bold font-archivo">
+          <a className="text-lg sm:text-3xl font-bold font-archivo">
             DUKA<span className="font-pocifico">poa</span>
+          </a>
+        </Link>
+        <Link href="/" >
+          <a className="relative group sm:text-xl">
+            <span>Shop</span>
+            <span className="absolute w-full bg-black transform scale-x-0 group-hover:scale-x-100 transition ease-bloop duration-400 rounded-sm h-0.5 left-0  -bottom-1"></span>
+            {isActive("/") && (
+              <span className="absolute w-full bg-black rounded-sm h-0.5 left-0 -bottom-1"></span>
+            )}
           </a>
         </Link>
         <div className="hidden sm:block w-1/4">
@@ -38,7 +47,7 @@ const Navbar = () => {
         </div>
         <div className="lg:w-1/6 flex justify-between items-center space-x-4">
           <Link href="/cart">
-            <a className="relative group flex items-center space-x-1 text-xl cursor-pointer">
+            <a className="relative group flex items-center space-x-1 text-sm sm:text-xl cursor-pointer">
               <span>Cart</span>
               <span>
                 <AiOutlineShoppingCart />
@@ -54,7 +63,7 @@ const Navbar = () => {
           </Link>
           {Object.keys(auth).length === 0 ? (
             <Link href="/login">
-              <a className="relative group flex items-center space-x-1 text-xl cursor-pointer">
+              <a className="relative group flex items-center space-x-1 text-sm sm:text-xl cursor-pointer">
                 <span>Login</span>
                 <span>
                   <AiOutlineUser />
