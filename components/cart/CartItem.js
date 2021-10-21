@@ -9,6 +9,14 @@ const CartItem = ({ product, cart, dispatch }) => {
     if (cart.products[idx].quantity === 1) return;
     dispatch(reduceCartItem(product, cart));
   };
+
+  const handleDeleteCartItem = () => {
+    if (
+      window.confirm(`Do you want to delete ${product.title} from your cart?`)
+    ) {
+      dispatch(deleteCartItem(product, cart));
+    }
+  };
   return (
     <tr className="border-b border-gray-100">
       <td>
@@ -48,7 +56,7 @@ const CartItem = ({ product, cart, dispatch }) => {
         </div>
       </td>
       <td className="px-4 lg:px-0">
-        <button onClick={() => dispatch(deleteCartItem(product, cart))}>
+        <button onClick={handleDeleteCartItem}>
           <IoTrashSharp />
         </button>
       </td>
