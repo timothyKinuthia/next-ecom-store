@@ -1,13 +1,33 @@
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
 import Head from "next/head";
 import Link from "next/link";
+import { useToasts } from "react-toast-notifications";
 
 import { Context } from "../store/store";
 import CartItem from "../components/cart/CartItem";
+import Payment from "./payment";
 
 const Cart = () => {
+  const [address, setAddress] = useState("");
+  const [mobile, setMobile] = useState("");
+  const [payment, setPayment] = useState(false);
+
+  //global state
   const { state, dispatch } = useContext(Context);
   const { cart } = state;
+
+  //toast
+  const { addToast } = useToasts();
+
+  const handlePayment = () => {
+    if (!address || !mobile) {
+      addToast("Please add your address and phone no.", {
+        appearance: "error",
+      });
+      return;
+    }
+    setPayment(true);
+  };
 
   if (cart.products.length === 0)
     return (
@@ -45,6 +65,8 @@ const Cart = () => {
               </label>
               <input
                 type="text"
+                value={address}
+                onChange={(evt) => setAddress(evt.target.value)}
                 className="border py-1 bg-gray-50 focus:outline-none focus:bg-white"
               />
             </div>
@@ -54,6 +76,8 @@ const Cart = () => {
               </label>
               <input
                 type="text"
+                value={mobile}
+                onChange={(evt) => setMobile(evt.target.value)}
                 className="border py-1 bg-gray-50 focus:outline-none focus:bg-white"
               />
             </div>
@@ -65,9 +89,16 @@ const Cart = () => {
             <div className="text-lg font-semibold">
               Total: <span className="ml-1 text-red">${cart.total}</span>
             </div>
-            <button className="w-full py-1 bg-light text-white font-bold">
-              Proceed to checkout
-            </button>
+            {payment ? (
+              <Payment total={cart.total} address= />
+            ) : (
+              <button
+                onClick={handlePayment}
+                className="w-full block py-1 bg-light text-white font-bold"
+              >
+                Proceed to checkout
+              </button>
+            )}
           </div>
         </div>
       </div>
