@@ -8,7 +8,10 @@ const orderSchema = new mongoose.Schema(
     },
     address: String,
     mobile: String,
-    cart: Array,
+    cart: {
+      type: mongoose.Types.ObjectId,
+      ref: "Cart",
+    },
     total: Number,
     delivered: {
       type: Boolean,

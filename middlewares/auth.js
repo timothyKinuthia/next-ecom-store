@@ -2,7 +2,7 @@ import jwt from 'jsonwebtoken';
 
 import User from '../models/userModel';
 
-const auth = async (req, res) => {
+export const auth = async (req, res) => {
     const token = req.headers.authorization;
 
     if (!token) return res.status(400).json({ msg: "Please login to continue" });
