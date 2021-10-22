@@ -90,7 +90,13 @@ const Cart = () => {
               Total: <span className="ml-1 text-red">${cart.total}</span>
             </div>
             {payment ? (
-              <Payment total={cart.total} address= />
+              <Payment
+                total={cart.total}
+                address={address}
+                mobile={mobile}
+                state={state}
+                dispatch={dispatch}
+              />
             ) : (
               <button
                 onClick={handlePayment}
