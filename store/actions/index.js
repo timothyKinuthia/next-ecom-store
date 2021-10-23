@@ -34,6 +34,8 @@ export const addToCart = (product, cart) => {
         payload: { ...cart, products: cartProducts, total: cartTotal },
       };
     }
+
+    
   }
 };
 

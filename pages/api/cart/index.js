@@ -1,5 +1,6 @@
 import dbConnect from "../../../utils/dbConnect";
 import Cart from "../../../models/cartModel";
+import Product from "../../../models/productModel";
 
 export default async function userCart(req, res) {
   dbConnect();
@@ -24,15 +25,22 @@ const createCart = async (req, res) => {
 
     if (cart) {
       await Cart.findOneAndUpdate(
-        { user: req.user._id, "cartItems.product": prodId },
-        { $inc: { "cartItems.$.count": 1, "cartItems.$.price": product.price } }
+        { user: userId, "cartItems.product": prodId },
+        {
+          $inc: {
+            "cartItems.$.quantity": 1,
+            "cartItems.$.sum": product.price,
+            total: product.price,
+          },
+        }
       );
     } else {
       await Cart.updateOne(
-        { user: req.user._id },
+        { user: userId },
         {
+          $inc: { total: product.price },
           $push: {
-            cartItems: { product: prodId, count: 1, price: product.price },
+            cartItems: { product: prodId, quantity: 1, sum: product.price * 1 },
           },
         },
         { upsert: true }
@@ -41,6 +49,6 @@ const createCart = async (req, res) => {
 
     res.status(201).json({ msg: "updated cart successfully" });
   } catch (err) {
-    res.status(500).json({ msg: "Internal server error" });
+    res.status(500).json({ msg: err.message });
   }
 };

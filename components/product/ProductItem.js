@@ -4,9 +4,24 @@ import { AiOutlineEye, AiOutlineShoppingCart } from "react-icons/ai";
 
 import { Context } from "../../store/store";
 import { addToCart } from "../../store/actions";
+import { postDataApi } from "../../utils/functions";
 
 const ProductItem = ({ product }) => {
   const { state, dispatch } = useContext(Context);
+  const { auth } = state;
+
+  const handleAddToCart = async () => {
+    dispatch(addToCart(product, state.cart));
+    try {
+      await postDataApi(
+        "cart",
+        { prodId: product._id, userId: auth.user._id },
+        auth.token
+      );
+    } catch (err) {
+      console.log(err)
+    }
+  };
 
   return (
     <div>
@@ -29,7 +44,7 @@ const ProductItem = ({ product }) => {
         </div>
         <div className="flex justify-between">
           <button
-            onClick={() => dispatch(addToCart(product, state.cart))}
+            onClick={handleAddToCart}
             className="flex items-center bg-gray-100 hover:bg-gray-200 py-1.5 px-2 rounded-md"
           >
             <span>Add</span>

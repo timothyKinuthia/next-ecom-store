@@ -12,12 +12,13 @@ const cartSchema = new mongoose.Schema(
           type: mongoose.Types.ObjectId,
           ref: "Product",
         },
-        count: { type: Number },
-        price: { type: Number },
+        quantity: { type: Number, default: 1 },
+        sum: { type: Number, default: 0 },
       },
     ],
-    totalPrice: {
+    total: {
       type: Number,
+      default: 0,
     },
   },
   { timestamps: true }
